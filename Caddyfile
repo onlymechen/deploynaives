@@ -1,0 +1,14 @@
+:443, webai.windawn.com
+tls onlymechen@me.com
+#tls self_signed onlymechen@me.com
+route {
+ forward_proxy {
+   basic_auth user 8fb311e1600543ad9adf4ae58f597315  #用户名和密码
+   hide_ip
+   hide_via
+   probe_resistance
+  }
+  file_server {
+    root /var/www/html 
+  }
+}
