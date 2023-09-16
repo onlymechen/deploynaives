@@ -14,7 +14,7 @@ chmod a+x $caddypath
 read -p  "input dnsname:" dnsname
 read -p  "input email:" mail
 pass=$(echo $RANDOM |md5sum | cut -c 1-32)
-webtext='Test web ok.Pls use domain name access this webServer.'
+webtext='This website only access use domain name. Pls use domain name access this webServer.'
 
 cat > /etc/systemd/system/naive.service << "EOF"
 [Unit]
@@ -46,6 +46,30 @@ tls $mail
 route {
  forward_proxy {
    basic_auth user $pass
+   hide_ip
+   hide_via
+   probe_resistance
+  }
+ forward_proxy {
+   basic_auth user1 $pass
+   hide_ip
+   hide_via
+   probe_resistance
+  }
+ forward_proxy {
+   basic_auth user2 $pass
+   hide_ip
+   hide_via
+   probe_resistance
+  }
+ forward_proxy {
+   basic_auth user3 $pass
+   hide_ip
+   hide_via
+   probe_resistance
+  }
+ forward_proxy {
+   basic_auth chenyang $pass
    hide_ip
    hide_via
    probe_resistance
